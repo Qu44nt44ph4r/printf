@@ -1,53 +1,49 @@
-#include <stdio.h>
-#include <stdarg.h>
 #include "main.h"
+#include <stdarg.h>
+#include <stdio.h>
 
-
+/**
+ * _printf - prints anything
+ * @format: list of argument types passed to the function
+ *
+ * Return: number of characters printed
+ */
 int _printf(const char *format, ...)
 {
-        int len = 0;
-        va_list args;
+	unsigned int i = 0, count = 0;
+	va_list args;
 
-        va_ start(args, format);
+	if (format == NULL)
+		return (-1);
 
-        while (format[i] != '\0')
-        {
-                if (*format == '%')
-                        format++;
+	va_start(args, format);
 
-                switch (*format)
-                {
-                    case 'c':
-                                _putchar((char)va_args (args, int));
-                                count++;
-                                break;
-                        case 's':
-                                {
-                                        const char *str = va_arg(args, const char *);
+	while (format[i])
+	{
+		if (format[i] == '%' && format[i + 1])
+		{
+			switch (format[i + 1])
+			{
+				case 'c':
+					count += _putchar(va_arg(args, int));
+					break;
+				case 's':
+					count += print_s(va_arg(args, char *));
+					break;
+				default:
+					_putchar('%');
+					_putchar(format[i + 1]);
+					count += 2;
+			}
+			i += 2;
+		}
+		else
+		{
+			count += _putchar(format[i]);
+			i++;
+		}
+	}
 
-                                        while (*str != '\0')
-                                        {
-                                                _putchar(*str);
-                                                count++;
-                                                break;
-                                        }
-                                }
-                                break;
-                        case '%':
-                                _putcahr('%');
-                                count++;
-                                break;
-                        default:
-                                break;
-
-                }
-                else
-                {
-                        putchar(*format);
-                        count++;
-                }
-                format++;
-        }
-        va_end(args);
-        return (count);
+	va_end(args);
+	return (count);
 }
