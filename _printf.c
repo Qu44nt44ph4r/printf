@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
 
 /**
  * _printf - prints anything
@@ -11,12 +9,12 @@
 int _printf(const char *format, ...)
 {
 	unsigned int i = 0, count = 0;
-	va_list args;
+	va_list valist;
 
 	if (format == NULL)
 		return (-1);
 
-	va_start(args, format);
+	va_start(valist, format);
 
 	while (format[i])
 	{
@@ -25,10 +23,10 @@ int _printf(const char *format, ...)
 			switch (format[i + 1])
 			{
 				case 'c':
-					count += _putchar(va_arg(args, int));
+					count += _putchar(va_arg(valist, int));
 					break;
 				case 's':
-					count += print_s(va_arg(args, char *));
+					count += new_puts(va_arg(valist, char *));
 					break;
 				default:
 					_putchar('%');
@@ -44,6 +42,6 @@ int _printf(const char *format, ...)
 		}
 	}
 
-	va_end(args);
+	va_end(valist);
 	return (count);
 }
