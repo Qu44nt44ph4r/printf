@@ -9,12 +9,12 @@
 int _printf(const char *format, ...)
 {
 	unsigned int i = 0, count = 0;
-	va_list args;
+	va_list arg_list;
 
 	if (format == NULL)
 		return (-1);
 
-	va_start(args, format);
+	va_start(arg_list, format);
 
 	while (format[i])
 	{
@@ -23,14 +23,15 @@ int _printf(const char *format, ...)
 			switch (format[i + 1])
 			{
 				case 'c':
-					count += _putchar(va_arg(args, int));
+					count += _putchar(va_arg(arg_list, int));
 					break;
 				case 's':
-					count += new_puts(va_arg(args, char *));
+					count += new_puts(va_arg(arg_list, char *));
 					break;
 				default:
 					_putchar('%');
-					count += 0;
+					_putchar(format[i + 1]);
+					count += 2;
 			}
 			i += 2;
 		}
@@ -41,6 +42,6 @@ int _printf(const char *format, ...)
 		}
 	}
 
-	va_end(args);
+	va_end(arg_list);
 	return (count);
 }
