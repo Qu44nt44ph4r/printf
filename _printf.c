@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
 
 /**
  * _printf - prints anything
@@ -28,7 +26,7 @@ int _printf(const char *format, ...)
 					count += _putchar(va_arg(args, int));
 					break;
 				case 's':
-					count += print_s(va_arg(args, char *));
+					count += new_puts(va_arg(args, char *));
 					break;
 				default:
 					_putchar('%');
