@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 					count += _putchar(va_arg(valist, int));
 					break;
 				case 's':
-					count += new_puts(va_arg(valist, char *));
+					count += new_puts(va_arg(valist, char *);
 					break;
 				default:
 					_putchar('%');
