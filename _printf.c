@@ -28,6 +28,13 @@ int _printf(const char *format, ...)
 				case 's':
 					count += new_puts(va_arg(arg_list, char *));
 					break;
+				case '%':
+					_putchar('%');
+					count++;
+					break;
+				case 'd':
+					count += print_d(va_arg(arg_list, int));
+					break;
 				default:
 					_putchar('%');
 					_putchar(format[i + 1]);
