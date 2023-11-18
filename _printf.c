@@ -3,7 +3,6 @@
 /**
  * _printf - prints anything
  * @format: list of argument types passed to the function
- *
  * Return: number of characters printed
  */
 int _printf(const char *format, ...)
@@ -15,7 +14,6 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	va_start(arg_list, format);
-
 	while (format[i])
 	{
 		if (format[i] == '%' && format[i + 1])
@@ -33,12 +31,14 @@ int _printf(const char *format, ...)
 					count++;
 					break;
 				case 'd':
-					count += print_d(va_arg(arg_list, int));
+				case 'i':
+					count += print_nums(va_arg(arg_list, int));
 					break;
 				default:
 					_putchar('%');
 					_putchar(format[i + 1]);
 					count += 2;
+					break;
 			}
 			i += 2;
 		}
@@ -48,7 +48,6 @@ int _printf(const char *format, ...)
 			i++;
 		}
 	}
-
 	va_end(arg_list);
 	return (count);
 }

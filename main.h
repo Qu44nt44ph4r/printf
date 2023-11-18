@@ -8,7 +8,6 @@
 int _putchar(char c);
 int _printf(const char *format, ...);
 int new_puts(char *c);
-int print_i(va_list i);
-int print_d(int d);
+int print_nums(int i);
 
 #endif
